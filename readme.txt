@@ -1,0 +1,6 @@
+-se creeaza socketi pentru conexiunile UPD si TCP cu mentiunea ca scocketul TCP este unul pasiv, pe care doar se asculta noi cereri de conexiuni de la subscriberi;
+-pentru gestionarea tuturor inputurilor serverului (publisheri UDP, subscriberi TCP, stdin) se foloseste multiplexarea I/O;
+-serverul ruleaza pana cand se primeste de la tastatura comanda exit;
+-informatiile despre ce mesaje trebuie transmise, carui client, despre clientii online si despre mesajele ce trebuie salvate pentru SF sunt pastrate folosind unordered_map-uri sau unordered_set-uri, deoarece aceasta implementare permite un acces eficient, in O(1) la fiecare topic sau client necesar;
+-daca vreuna dintre operatiile critice esueaza (creare de socketi, apeluri de select, bind sau listen), serverul se inchide, inchizandu-si si toate conexiunile la socketii sai activi;
+-se considera ca mesajele de la clientii UDP nu vor contine \0 nici in campul de date, nici in cel de topic;
